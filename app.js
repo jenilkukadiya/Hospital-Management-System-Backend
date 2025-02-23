@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config({ path: "./config.env" });
+
 import express from "express";
 import { dbConnection } from "./database/dbConnection.js";
-import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import fileUpload from "express-fileupload";
@@ -10,7 +12,9 @@ import userRouter from "./router/userRouter.js";
 import appointmentRouter from "./router/appointmentRouter.js";
 
 const app = express();
-config({ path: "./config.env" });
+
+
+console.log("MONGO_URIII:", process.env.MONGO_URI);
 
 app.use(
   cors({
