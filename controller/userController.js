@@ -194,13 +194,16 @@ export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Logout function for dashboard admin
 export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
+  const prod = process.env.FRONTEND_URL_ONE === "https://clever-figolla-5c9f25.netlify.app";
+
   res
-    .status(201)
+    .status(200)
     .cookie("adminToken", "", {
       httpOnly: true,
       expires: new Date(Date.now()),
+      sameSite: prod ? "None" : "Lax",
+      secure: prod,
     })
     .json({
       success: true,
@@ -208,13 +211,17 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
-// Logout function for frontend patient
+
 export const logoutPatient = catchAsyncErrors(async (req, res, next) => {
+  const prod = process.env.FRONTEND_URL_ONE === "https://clever-figolla-5c9f25.netlify.app";
+
   res
-    .status(201)
+    .status(200)
     .cookie("patientToken", "", {
       httpOnly: true,
       expires: new Date(Date.now()),
+      sameSite: prod ? "None" : "Lax",
+      secure: prod,
     })
     .json({
       success: true,
